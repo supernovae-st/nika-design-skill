@@ -1,0 +1,201 @@
+/*
+ * Nika Design — Typography tokens (v0.1 — Triad A)
+ * License: AGPL-3.0-or-later
+ *
+ * All fonts OFL or free-commercial. Self-hosted. No CDN.
+ * See PRINCIPLES.md §5 §13 — monospace hegemony, banned fonts list.
+ *
+ * Fonts must be placed at /fonts/<filename>.woff2 in the consuming project.
+ * Download sources (see DESIGN.md for foundry links):
+ *   Basteleur         — velvetyne.fr/fonts/basteleur
+ *   Departure Mono    — departuremono.com
+ *   Recursive         — recursive.design (github.com/arrowtype/recursive)
+ *   JGS Font          — velvetyne.fr/fonts/jgs-font
+ *   Nabla             — fonts.google.com/specimen/Nabla
+ */
+
+/* ---- Face declarations ---- */
+
+@font-face {
+  font-family: 'Basteleur';
+  src: url('/fonts/Basteleur-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Basteleur';
+  src: url('/fonts/Basteleur-Moonlight.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Departure Mono';
+  src: url('/fonts/DepartureMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Recursive';
+  src: url('/fonts/Recursive_VF_1.085--subset_range_basic.woff2') format('woff2-variations'),
+       url('/fonts/Recursive_VF_1.085--subset_range_basic.woff2') format('woff2');
+  font-weight: 300 1000;
+  font-style: normal;
+  font-display: swap;
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0.5;
+}
+
+@font-face {
+  font-family: 'JGS Font';
+  src: url('/fonts/jgs7.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+2500-257F, U+2580-259F, U+2800-28FF, U+0020-007E;
+}
+
+/* ---- Stack tokens ---- */
+
+:root {
+  /* Primary stacks.
+   * NOTE: 'Berkeley Mono' is listed as an aspirational pre-token for the v0.2
+   * paid-upgrade path (PRINCIPLES.md §5). If the license is acquired later,
+   * swap only the @font-face source — no page-level changes needed.
+   */
+  --nika-font-display: 'Basteleur', 'Times New Roman', ui-serif, serif;
+  --nika-font-mono:    'Departure Mono', 'Berkeley Mono', 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --nika-font-body:    'Recursive', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --nika-font-frame:   'JGS Font', 'Departure Mono', ui-monospace, monospace;
+
+  /* Recursive axes — use via font-variation-settings */
+  --nika-rec-sans:   'MONO' 0, 'CASL' 0, 'slnt' 0;
+  --nika-rec-mono:   'MONO' 1, 'CASL' 0, 'slnt' 0;
+  --nika-rec-casual: 'MONO' 0, 'CASL' 0.8, 'slnt' 0;
+
+  /* OpenType features — ALWAYS tabular nums + slashed zero on mono */
+  --nika-ot-mono:    'tnum' 1, 'zero' 1, 'ss01' 1;
+  --nika-ot-display: 'ss01' 1, 'ss02' 1, 'liga' 1, 'dlig' 1;
+  --nika-ot-body:    'kern' 1, 'liga' 1, 'calt' 1;
+
+  /* ---- Type scale ---- */
+  /* Fluid via clamp() — scales from mobile min to desktop max */
+  --nika-size-label:    clamp(0.625rem, 0.6rem + 0.1vw, 0.6875rem);  /* 10-11px */
+  --nika-size-caption:  clamp(0.75rem,  0.72rem + 0.1vw, 0.8125rem); /* 12-13px */
+  --nika-size-body-sm:  clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);/* 13-14px */
+  --nika-size-body:     clamp(0.9375rem, 0.9rem + 0.18vw, 1rem);     /* 15-16px */
+  --nika-size-lead:     clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);   /* 17-19px */
+  --nika-size-subhead:  clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);     /* 20-24px */
+  --nika-size-heading:  clamp(1.625rem, 1.4rem + 1vw, 2.25rem);      /* 26-36px */
+  --nika-size-display-sm: clamp(2rem, 1.6rem + 2vw, 3rem);           /* 32-48px */
+  --nika-size-display-md: clamp(2.75rem, 2rem + 3.5vw, 4.5rem);      /* 44-72px */
+  --nika-size-display-lg: clamp(3.5rem, 2.5rem + 5vw, 6rem);         /* 56-96px */
+  --nika-size-display-xl: clamp(4.5rem, 3rem + 7vw, 8rem);           /* 72-128px */
+
+  /* ---- Tracking (letter-spacing) ---- */
+  --nika-track-label:   0.08em;
+  --nika-track-caption: 0.04em;
+  --nika-track-body:    0;
+  --nika-track-display: -0.03em;
+  --nika-track-wide:    0.12em;
+
+  /* ---- Leading (line-height) ---- */
+  --nika-lead-tight:    0.85;
+  --nika-lead-snug:     1;
+  --nika-lead-base:     1.5;
+  --nika-lead-relaxed:  1.65;
+}
+
+/* ---- Semantic classes ---- */
+/* Usage: class="nika-label" on <span>, class="nika-display" on <h1>, etc. */
+
+.nika-label,
+.nika-annotation {
+  font-family: var(--nika-font-mono);
+  font-size: var(--nika-size-label);
+  line-height: 1;
+  letter-spacing: var(--nika-track-label);
+  text-transform: uppercase;
+  font-feature-settings: var(--nika-ot-mono);
+  color: var(--nika-text-mute);
+}
+
+.nika-caption {
+  font-family: var(--nika-font-mono);
+  font-size: var(--nika-size-caption);
+  line-height: var(--nika-lead-snug);
+  letter-spacing: var(--nika-track-caption);
+  font-feature-settings: var(--nika-ot-mono);
+  color: var(--nika-text-mute);
+}
+
+.nika-body {
+  font-family: var(--nika-font-body);
+  font-size: var(--nika-size-body);
+  line-height: var(--nika-lead-base);
+  font-variation-settings: var(--nika-rec-sans);
+  font-feature-settings: var(--nika-ot-body);
+  color: var(--nika-text);
+}
+
+.nika-body-mono {
+  font-family: var(--nika-font-mono);
+  font-size: var(--nika-size-body);
+  line-height: var(--nika-lead-base);
+  font-feature-settings: var(--nika-ot-mono);
+  color: var(--nika-text);
+}
+
+.nika-heading {
+  font-family: var(--nika-font-mono);
+  font-size: var(--nika-size-heading);
+  font-weight: 400;
+  line-height: var(--nika-lead-snug);
+  letter-spacing: var(--nika-track-display);
+  font-feature-settings: var(--nika-ot-mono);
+  color: var(--nika-text);
+}
+
+.nika-display {
+  font-family: var(--nika-font-display);
+  font-size: var(--nika-size-display-lg);
+  font-weight: 700;
+  line-height: var(--nika-lead-tight);
+  letter-spacing: var(--nika-track-display);
+  font-feature-settings: var(--nika-ot-display);
+  color: var(--nika-text);
+}
+
+.nika-display-xl {
+  font-family: var(--nika-font-display);
+  font-size: var(--nika-size-display-xl);
+  font-weight: 700;
+  line-height: var(--nika-lead-tight);
+  letter-spacing: var(--nika-track-display);
+  font-feature-settings: var(--nika-ot-display);
+}
+
+.nika-frame,
+.nika-ascii {
+  font-family: var(--nika-font-frame);
+  font-size: var(--nika-size-body-sm);
+  line-height: var(--nika-lead-snug);
+  white-space: pre;
+  color: var(--nika-text-mute);
+}
+
+/* ---- Base body defaults ---- */
+body {
+  font-family: var(--nika-font-body);
+  font-size: var(--nika-size-body);
+  line-height: var(--nika-lead-base);
+  font-variation-settings: var(--nika-rec-sans);
+  font-feature-settings: var(--nika-ot-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

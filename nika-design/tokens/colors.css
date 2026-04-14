@@ -1,0 +1,82 @@
+/*
+ * Nika Design — Color tokens
+ * License: AGPL-3.0-or-later
+ *
+ * Dark-only palette. OKLCH primary, hex fallback.
+ * Lock: see PRINCIPLES.md §6 — one chromatic punch per screen.
+ *
+ * Usage:
+ *   @import url("./colors.css");
+ *   body { background: var(--nika-abyss); color: var(--nika-text); }
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces — near-black, cooler-than-pure, picks up the blue */
+  --nika-abyss:         oklch(0.14 0.007 240);  /* #05070A */
+  --nika-panel:         oklch(0.17 0.008 240);  /* #0E1014 */
+  --nika-raised:        oklch(0.20 0.010 240);  /* #14171D */
+  --nika-sunken:        oklch(0.12 0.006 240);  /* #040609 */
+
+  /* Borders */
+  --nika-border:        oklch(0.26 0.010 240);  /* #1E232B */
+  --nika-border-bright: oklch(0.32 0.012 240);  /* #2C333E */
+
+  /* Text */
+  --nika-text:          oklch(0.93 0.004 240);  /* #E8ECEE */
+  --nika-text-mute:     oklch(0.66 0.010 240);  /* #8B949E */
+  --nika-text-dim:      oklch(0.44 0.010 240);  /* #4A5462 */
+  --nika-text-ghost:    oklch(0.30 0.008 240);  /* #2A3138 */
+
+  /* Accents — one hot per screen (PRINCIPLES.md §6) */
+  --nika-cyan:          oklch(0.89 0.16 220);   /* #3BE8FF — primary, links, active */
+  --nika-amber:         oklch(0.80 0.17 75);    /* #FFB000 — warnings, NIKA-XXX, CTAs */
+  --nika-lichen:        oklch(0.67 0.10 135);   /* #7DAA6E — success, organic texture */
+
+  /* Error (rare, A.T. Field only) */
+  --nika-crimson:       oklch(0.60 0.21 25);    /* #E63946 */
+
+  /* Dithered texture source (for Worley/lichen overlays) */
+  --nika-dither-blue:   oklch(0.30 0.06 240);   /* #2A3848 — base of Bayer/Atkinson photos */
+
+  /* Dimmed variants — for outlines when accent is inactive on screen */
+  --nika-cyan-dim:      oklch(0.89 0.16 220 / 0.28);
+  --nika-amber-dim:     oklch(0.80 0.17 75 / 0.28);
+  --nika-lichen-dim:    oklch(0.67 0.10 135 / 0.28);
+
+  /* Functional aliases (semantic over literal) */
+  --nika-link:          var(--nika-cyan);
+  --nika-warning:       var(--nika-amber);
+  --nika-success:       var(--nika-lichen);
+  --nika-error:         var(--nika-crimson);
+
+  /* Focus ring — cyan, never outline: none */
+  --nika-focus:         var(--nika-cyan);
+  --nika-focus-shadow:  0 0 0 2px var(--nika-abyss), 0 0 0 4px var(--nika-cyan);
+}
+
+/*
+ * Hex fallbacks for browsers without OKLCH (Safari < 15.4, old Chromium).
+ * Progressive enhancement — OKLCH loads above, hex only if the browser
+ * can't parse OKLCH.
+ */
+@supports not (color: oklch(0 0 0)) {
+  :root {
+    --nika-abyss:         #05070A;
+    --nika-panel:         #0E1014;
+    --nika-raised:        #14171D;
+    --nika-sunken:        #040609;
+    --nika-border:        #1E232B;
+    --nika-border-bright: #2C333E;
+    --nika-text:          #E8ECEE;
+    --nika-text-mute:     #8B949E;
+    --nika-text-dim:      #4A5462;
+    --nika-text-ghost:    #2A3138;
+    --nika-cyan:          #3BE8FF;
+    --nika-amber:         #FFB000;
+    --nika-lichen:        #7DAA6E;
+    --nika-crimson:       #E63946;
+    --nika-dither-blue:   #2A3848;
+  }
+}

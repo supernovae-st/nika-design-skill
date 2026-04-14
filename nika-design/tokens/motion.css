@@ -1,0 +1,79 @@
+/*
+ * Nika Design — Motion tokens
+ * License: AGPL-3.0-or-later
+ *
+ * PRINCIPLES.md §8 §12 §15:
+ *   - Slow zooms (400-600ms) for reveals
+ *   - Instant cuts (0ms) or linear 80-150ms for state changes
+ *   - NO spring, bounce, elastic, overshoot
+ *   - Annotations > animations
+ */
+
+:root {
+  /* ---- Timing functions (easing curves) ---- */
+
+  /* The only two curves you're allowed to use: */
+  --nika-ease-zoom: cubic-bezier(0.16, 1, 0.3, 1);   /* slow ease-out — for reveals, section transitions */
+  --nika-ease-cut:  cubic-bezier(0.4, 0, 0.2, 1);    /* crisp — for state changes, hover */
+
+  /* ---- Durations ---- */
+  --nika-dur-cut:    0ms;           /* instant */
+  --nika-dur-instant: 80ms;         /* state change floor */
+  --nika-dur-fast:   150ms;         /* hover, focus */
+  --nika-dur-base:   300ms;         /* reveal-on-scroll */
+  --nika-dur-slow:   600ms;         /* section transition */
+  --nika-dur-hero:   22s;           /* Ken Burns zoom on hero photo */
+
+  /* ---- Preset transitions ---- */
+
+  /* Hover — border luminance +20%, no translate, no scale */
+  --nika-tr-hover:      border-color var(--nika-dur-fast) var(--nika-ease-cut),
+                        color var(--nika-dur-fast) var(--nika-ease-cut),
+                        background-color var(--nika-dur-fast) var(--nika-ease-cut);
+
+  /* Focus — instant ring */
+  --nika-tr-focus:      box-shadow var(--nika-dur-instant) var(--nika-ease-cut);
+
+  /* Reveal-on-scroll — opacity only, no translate */
+  --nika-tr-reveal:     opacity var(--nika-dur-base) var(--nika-ease-zoom);
+
+  /* Section transition — slow zoom */
+  --nika-tr-section:    transform var(--nika-dur-slow) var(--nika-ease-zoom),
+                        opacity var(--nika-dur-slow) var(--nika-ease-zoom);
+}
+
+/* ---- Respect prefers-reduced-motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --nika-dur-cut:    0ms;
+    --nika-dur-instant: 0ms;
+    --nika-dur-fast:   0ms;
+    --nika-dur-base:   0ms;
+    --nika-dur-slow:   0ms;
+    --nika-dur-hero:   0s;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Banned patterns (reference — do not re-implement) ---- */
+/*
+ * BANNED easing (PRINCIPLES.md §8):
+ *   cubic-bezier(0.68, -0.55, 0.27, 1.55)   ← back-out / overshoot
+ *   cubic-bezier(0.175, 0.885, 0.32, 1.275) ← elastic
+ *   Any spring, bounce, or overshoot curve.
+ *
+ * BANNED patterns:
+ *   - parallax > 0.4 multiplier
+ *   - scroll-hijacking past 3vh
+ *   - translate on reveal-on-scroll
+ *   - scale on hover
+ *   - transform-origin flipping mid-animation
+ */
