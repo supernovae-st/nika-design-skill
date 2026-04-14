@@ -33,9 +33,9 @@ Load these files, in order:
 
 Then, depending on task:
 
-- Generating a page? → also read `tokens/motion.css`, `tokens/spacing.css`, `references/cinema.md`, and the matching file in `components/`.
-- Reviewing existing design? → read `prompts/review-design.md`.
-- Checking for slop? → read `prompts/anti-slop-check.md` and run it against your own output.
+- Generating a page? → also read `tokens/motion.css`, `tokens/spacing.css`, `references/cinema.md`. If a matching `components/<name>.md` exists, read it; otherwise compose from primitives using `DESIGN.md` §6.
+- Reviewing existing design? → read `references/forbidden.md` and run the self-audit checklist (Section 6.2 below) against the output.
+- Checking for slop? → read `references/forbidden.md` line by line against the output.
 
 ---
 
@@ -68,7 +68,7 @@ Six principles. If any decision conflicts with these, the principle wins.
 3. **Everything is labeled.** Version stamps, build IDs, coordinates, timestamps, section numbers. The UI is an instrument panel. Labels are not decoration — they are the design.
 4. **Dark-only for v0.9x.** Light mode is explicitly out of scope. Don't add it.
 5. **The butterfly earns each placement.** One per page maximum. Never decorative. If you can't justify why it's there in a sentence, delete it.
-6. **Cinema, not dashboards.** The reference texture is celluloid grain, not Figma. Slow zooms, instant cuts, hard consonants. No soft bounce. No parallax.
+6. **Cinema, not dashboards.** The reference texture is celluloid grain, not Figma. Slow zooms, instant cuts, hard consonants. No soft bounce. No mouse-parallax. Scroll parallax ≤ 0.4 multiplier only.
 
 ---
 
@@ -85,7 +85,7 @@ Follow this order. Don't skip steps.
 7. **Build with components**: if a matching `components/*.md` exists, follow its spec. If not, compose from primitives.
 8. **Add annotations**: version stamps, fig-numbers, NIKA-XXX codes, timestamps, coordinates. Real data only. See Rule 3 in `PRINCIPLES.md`.
 9. **Add exactly one dithered texture**: lichen, nebula, or wing-scale. SVG or build-time PNG. See `components/texture.md` (when present) or the inline generator in `references/cinema.md`.
-10. **Run anti-slop check**: use `prompts/anti-slop-check.md` against your output. If any forbidden item triggers, revise.
+10. **Run anti-slop check**: read `references/forbidden.md` and verify none of its bans appear in your output. If any item triggers, revise.
 11. **Output**: plain HTML + CSS vars by default. Offer Astro or Tailwind v4 only if the user asks.
 
 ---

@@ -171,7 +171,7 @@ Never photographic. Always SVG or canvas-rendered or build-time PNG.
 9. Daft Punk chrome SVG title with banded gradient for Nika wordmark.
 10. MU-TH-UR boot on first-ever visit to `/docs`, one-time.
 11. GITS thin orange reticle crosshairs in terminal output blocks.
-12. Tron-style 1px glass panels (`backdrop-filter: blur(20px) saturate(180%)`).
+12. Tron-style 1px border panels on dark surfaces (no blur/glassmorphism — use 1px `--nika-border` + SVG noise overlay instead).
 13. Hard-cut section boundaries — no scroll animations > 80ms.
 14. Every section gets a technical metadata strip.
 15. Typewriter reveal for homepage headline, then static forever.

@@ -47,7 +47,7 @@
   font-weight: 300 1000;
   font-style: normal;
   font-display: swap;
-  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0.5;
+  font-variation-settings: 'MONO' 0, 'CASL' 0, 'slnt' 0, 'CRSV' 0;
 }
 
 @font-face {

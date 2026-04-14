@@ -119,7 +119,7 @@ Banned forever:
 - **JetBrains Mono alone** (IDE default)
 - **Cal Sans** (shadcn hero cliché)
 
-If a font feels like it's "trying to look futuristic," it isn't. Our font discipline is Basteleur (display) + Departure Mono (mono workhorse) + Recursive Sans Linear (long-form body) + JGS Font (ASCII blocks) + Nabla (one wow-glyph moment, COLRv1).
+If a font feels like it's "trying to look futuristic," it isn't. Our font discipline is Basteleur (display ≥ 32px) + Departure Mono (mono workhorse) + Recursive Sans Linear (long-form body) + JGS Font (ASCII blocks).
 
 ## 14. Layout — asymmetric, edge-anchored, deliberately unbalanced
 
